@@ -1,16 +1,16 @@
 # Tugas 1 — Analisis Pitfall FoodGo
 
-**Kelompok:** [nama kelompok]
+**Kelompok:** Kelompok 4
 
 | Nama | NIM | Kontribusi |
 |---|---|---|
-| [nama 1] | [nim] | [pitfall/bagian yang dikerjakan] |
-| [nama 2] | [nim] | [pitfall/bagian yang dikerjakan] |
+| Nabilah Robbaniyah | 103072400092 | The network is reliable |
+| Kholifa Ayu Lestari | 103072400114 | [pitfall/bagian yang dikerjakan] |
 | [nama 3] | [nim] | [pitfall/bagian yang dikerjakan] |
 
-## Pitfall 1: [nama pitfall] — ditulis oleh [nama]
+## Pitfall 1: The network is Reliable — ditulis oleh [nama]
 
-**Bukti di skenario:** [kutip/paraphrase bagian skenario]
+**Bukti di skenario:** Ada asumsi dalam kode "# network is always reliable, no need for retry" yang ditulis tim engineering Food Go
 
 **Kenapa ini keliru:** [penjelasan]
 
@@ -24,7 +24,15 @@
 
 ## Pitfall 2: [nama pitfall] — ditulis oleh [nama]
 
-(ulangi struktur di atas)
+**Bukti di skenario:** [bukti dari skenario]
+
+**Kenapa ini keliru:** [penjelasan]
+
+**Dampak ke FoodGo:** [mekanisme kegagalan konkret]
+
+**Solusi desain awal:** [usulan solusi]
+
+**Trade-off:** [apa yang dikorbankan/risiko dari solusi ini]
 
 ---
 
