@@ -5,7 +5,7 @@
 | Nama | NIM | Kontribusi |
 |---|---|---|
 | Nabilah Robbaniyah | 103072400092 | The network is reliable |
-| Kholifa Ayu Lestari | 103072400114 | [pitfall/bagian yang dikerjakan] |
+| Kholifa Ayu Lestari | 103072400114 | Latency is zero |
 | [nama 3] | [nim] | [pitfall/bagian yang dikerjakan] |
 
 ## Pitfall 1: The network is Reliable — ditulis oleh [nama]
@@ -22,7 +22,7 @@
 
 ---
 
-## Pitfall 2: [nama pitfall] — ditulis oleh [nama]
+## Pitfall 2: [Latency is zero] — ditulis oleh [nama]
 
 **Bukti di skenario:** [bukti dari skenario]
 
