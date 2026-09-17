@@ -6,7 +6,7 @@
 |---|---|---|
 | Nabilah Robbaniyah | 103072400092 | The network is reliable |
 | Kholifa Ayu Lestari | 103072400114 | Latency is zero |
-| [nama 3] | [nim] | [pitfall/bagian yang dikerjakan] |
+| Afiya Nadifa Febianti | 1030724000 | [pitfall/bagian yang dikerjakan] |
 
 ## Pitfall 1: The network is Reliable — ditulis oleh [nama]
 
