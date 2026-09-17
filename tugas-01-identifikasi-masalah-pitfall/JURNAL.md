@@ -4,7 +4,7 @@
 
 ## [Tanggal diskusi 1: Kamis, 17-September 2026]
 - Peserta: [Nabilah Robbaniyah dan Kholifa Ayu Lestari]
-- Poin diskusi: ...
+- Poin diskusi: Identifikasi pitfball pada studi  kasus FoodGo
 - Perbedaan pendapat (jika ada): ...
 
 ## [Tanggal diskusi 2]
