@@ -22,17 +22,22 @@
 
 ---
 
-## Pitfall 2: [Latency is zero] — ditulis oleh [nama]
+## Pitfall 2: Latency is zero — ditulis oleh Kholifa Ayu Lestari
 
-**Bukti di skenario:** [bukti dari skenario]
+**Bukti di skenario:** pada studi kasus FoodGo, terdapat kondisi ketika modul pesanan memanggil modul pembayaran dan menunggu tanpa batas waktu (timeout). hal tersebut menunjukkan sistem tidak memperhitungkan adanya kemungkinan adanya keterlambatan dalam komunikasi antara service.
 
-**Kenapa ini keliru:** [penjelasan]
+ketika jumlah pesanan meningkat, aplikasi menjadi sangat lambat dan beberapa permintaan mengalami timeout. kondisi ini menunjukkan bahwa waktu yang dibutuhkan untuk komunikasi dan pemrosesan antar-service tidak selalu dapat dianggap nol.
 
-**Dampak ke FoodGo:** [mekanisme kegagalan konkret]
+**Kenapa ini keliru**: Asumsi "latency is zero berarti menganggap komunikasi antar-komponen atau antar-service dapat berlangsung secara langsung tanpa adanya keterlambatan. asumsi tersebut keliru dalam sistem terdistribusi karena komunikasi antar-service dilakukan melalui jaringan dan membutuhkan waktu.
 
-**Solusi desain awal:** [usulan solusi]
+latensi dapat dipengaruhi oleh berbagai kondisi, seperti peningkatan jumlah request, beban server, kondisi jaringan, maupun service yang sedang mengalami gangguan. Waktu respons suatu service juga tidak selalu sama dan dapat berubah sesuai kondisi sistem.
 
-**Trade-off:** [apa yang dikorbankan/risiko dari solusi ini]
+**Dampak ke FoodGo:** ketika modul pembayaran mengalami keterlambatan, modul pesanan akan tetap menunggu karena tidak memiliki batas waktu. jika kondisi tersebut terjadi pada banyak pesanan secara bersamaan, semakin banyak request yang tertahan.
+
+
+**Solusi desain awal:** FoodGo perlu menerapkan timeout pada komunikasi antara modul pesanan dan pembayaran agar modul pesanan tidak menunggu tanpa batas waktu. Jika terjadi kegagalan sementara, sistem dapat menggunakan retry secara terbatas dengan backoff. Untuk proses yang tidak harus mendapatkan respons secara langsung, komunikasi asynchronous juga dapat digunakan agar beban pada server tidak menumpuk.
+
+**Trade-off:** Penerapan timeout dapat mencegah request menunggu terlalu lama, tetapi jika waktu yang ditentukan terlalu singkat, request yang sebenarnya masih dapat berhasil bisa dianggap gagal. Selain itu, penggunaan retry dapat membantu saat terjadi gangguan sementara, tetapi jika terlalu sering justru menambah beban server.
 
 ---
 
