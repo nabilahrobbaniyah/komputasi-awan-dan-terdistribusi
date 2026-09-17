@@ -8,17 +8,17 @@
 | Kholifa Ayu Lestari | 103072400114 | Latency is zero |
 | Afiya Nadifa Febianti | 1030724000 | [pitfall/bagian yang dikerjakan] |
 
-## Pitfall 1: The network is Reliable — ditulis oleh [nama]
+## Pitfall 1: The network is Reliable — ditulis oleh Nabilah Robbaniyah
 
-**Bukti di skenario:** Ada asumsi dalam kode "# network is always reliable, no need for retry" yang ditulis tim engineering Food Go
+**Bukti di skenario:** Ada asumsi dalam kode "# network is always reliable, no need for retry" yang ditulis tim engineering FoodGo. Tidak memakai timeout sama sekali pada pemanggilan antar modul
 
-**Kenapa ini keliru:** [penjelasan]
+**Kenapa ini keliru:** di sistem terdistribusi, jaringan fisik tidak pernah 100% handal
 
-**Dampak ke FoodGo:** [mekanisme kegagalan konkret]
+**Dampak ke FoodGo:** Ketika pemanggilan ke modul pembayaran mengalami kegagalan koneksi atau hambatan, modul pesanan akan ketahan selamanya
 
-**Solusi desain awal:** [usulan solusi]
+**Solusi desain awal:** memakai mekanisme Timeout, sehingga ada batas waktu maksimal menunggu respons
 
-**Trade-off:** [apa yang dikorbankan/risiko dari solusi ini]
+**Trade-off:** 
 
 ---
 
