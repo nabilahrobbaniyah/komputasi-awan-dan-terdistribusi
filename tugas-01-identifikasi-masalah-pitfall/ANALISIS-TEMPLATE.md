@@ -16,7 +16,7 @@
 
 **Dampak ke FoodGo:** Ketika pemanggilan ke modul pembayaran mengalami kegagalan koneksi atau hambatan, modul pesanan akan ketahan selamanya
 
-**Solusi desain awal:** memakai mekanisme Timeout, sehingga ada batas waktu maksimal menunggu respons
+**Solusi desain awal:** memakai mekanisme Timeout, sehingga ada batas waktu maksimal menunggu respons. menggunakan Retry with exponential backoff dan jitter, agar tidak membebankan jaringan, percobaan ulang berkala dikombinasikan dengan variasi waktu acak.
 
 **Trade-off:** 
 
