@@ -18,7 +18,7 @@
 
 **Solusi desain awal:** memakai mekanisme Timeout, sehingga ada batas waktu maksimal menunggu respons. menggunakan Retry with exponential backoff dan jitter, agar tidak membebankan jaringan, percobaan ulang berkala dikombinasikan dengan variasi waktu acak.
 
-**Trade-off:** 
+**Trade-off:** melakukan retry tanpa pengaturan yang tepat justru bisa menambah beban jaringan dan memicu masalah thundering herd atau bahkan cascading failure. penerapan timeout untuk mempercepat kegagalan transaksi (fail-fast) membuat aplikasi harus mampu mengelola status pesanan secara lebih cermat, terutama melalui mekanisme idempotency serta kompensasi transaksi
 
 ---
 
