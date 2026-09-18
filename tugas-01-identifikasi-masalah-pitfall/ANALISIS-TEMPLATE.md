@@ -6,7 +6,7 @@
 |---|---|---|
 | Nabilah Robbaniyah | 103072400092 | The network is reliable |
 | Kholifa Ayu Lestari | 103072400114 | Latency is zero |
-| Afiya Nadifa Febianti | 1030724000 | [pitfall/bagian yang dikerjakan] |
+| Afiya Nadifa Febianti | 103072400036 | Monolik & Single Point of Failure |
 
 ## Pitfall 1: The network is Reliable — ditulis oleh Nabilah Robbaniyah
 
@@ -41,12 +41,21 @@ latensi dapat dipengaruhi oleh berbagai kondisi, seperti peningkatan jumlah requ
 
 ---
 
-## Pitfall 3: [nama pitfall] — ditulis oleh [nama]
+## Pitfall 3: Monolitik & Single Point of Failure — ditulis oleh Afiya Nadifa Febianti
 
-(ulangi struktur di atas)
+**Bukti di skenario:** menyebutkan "satu server yang menangani semua modul (pesanan, pembayaran, notifikasi kurir) kewalahan karena semuanya berjalan di satu proses monolitik yang sama" dan "server backend kadang crash total dan perlu direstart manual" yang menunjukan modul-modul berbagi resource proses dan server yang sama sehingga beban tinggi pada satu bagian dapat memengaruhi bagian lainnya.
+
+**Kenapa ini keliru:** dalam sistem terdistribusi, menempatkan banyak fungsi penting dalam satu proses dapat membuat modul-modul tersebut berbagi resource dan tidak memiliki isolasi kegagalan yang memadai. Ketika beban meningkat, penggunaan resource oleh satu bagian dapat memengaruhi bagian lainnya. Ketergantungan pada satu server juga membuat kegagalan server berpotensi menjadi Single Point of Failure karena beberapa fungsi dapat ikut terganggu ketika server tersebut gagal. 
+
+**Dampak ke FoodGo:** ketika trafik meningkat, satu server harus menangani modul pesanan, pembayaran, dan notifikasi kurir secara bersamaan sehingga server menjadi kewalahan. Kondisi tersebut dapat menyebabkan aplikasi semakin lambat dan beberapa request mengalami timeout. Jika backend mengalami crash, beberapa modul yang berada dalam proses tersebut dapat ikut berhenti dan layanan membutuhkan restart manual untuk kembali berjalan.
+
+**Solusi desain awal:** FoodGo dapat memulai memisahkan modul yang memiliki tanggung jawab berbeda menjadi service atau proses yang dapat diisolasi sehingga kegagalan atau beban tinggi pada satu bagian tidak langsung berdampak pada seluruh sistem. Resource isolation atau bulkhead dapat digunakan untuk membatasi dampak beban antarbagian, sedangkan beberapa instance untuk service penting dapat mengurangi ketergantungan pada satu server. Health check dan automatic restart juga dapat digunakan untuk membantu pemulihan ketika terjadi kegagalan.
+
+**Trade-off:** pemisahan service dapat meningkatkan isolasi dan mengurangi ketergantungan pada satu proses, tetapi membuat sistem lebih kompleks karena komunikasi antar-service berlangsung melalui jaringan. FoodGo kemudian perlu menangani latency, kegagalan komunikasi, omnitoring, dan debugging antar-service yang sebelumnya lebih sederhana dalam aplikasi monolitik.
+
 
 ---
 
 ## Kesimpulan Kelompok
 
-[Ringkasan: jika FoodGo memperbaiki ketiga pitfall ini, apa arsitektur yang disarankan secara garis besar? Kaitkan dengan Tugas 2.]
+Ketiga pitfall menunjukan bahwa FoodGo membutuhkan arsitektur yang lebih decouple, memiliki isolasi antar-service, serta mampu menangani latency dan kegagalan komunikasi. Secara garis besar, modul Pesanan, Pembayaran, Kurir/Notifikasi, dan Katalog Resto dapat dipisahkan menjadi service dengan tanggung jawab masing-masing. Hasil ini menjadi dasar untuk Tugas 2, yaitu mempertimbangkan SOA sebagai gaya arsitektur utama untuk pemisahan service dan Publish-Subscribe untuk komunikasi berbasis event/asynchronus pada proses yang sesuai. Pemilihan tersebut tetap perlu dibahas kelompok berdasarkan kebutuhan FoodGo dan trade-off yang ditemukan pada Tugas 1.
