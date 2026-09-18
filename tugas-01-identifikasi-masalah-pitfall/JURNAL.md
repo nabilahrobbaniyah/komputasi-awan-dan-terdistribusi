@@ -2,8 +2,8 @@
 
 > Isi jurnal ini selama proses diskusi berlangsung, bukan ditulis ulang rapi di akhir. Tulis dengan gaya bebas — poin diskusi, kebuntuan, perubahan pikiran.
 
-## [Tanggal diskusi 1: Kamis, 17-September 2026]
-- Peserta: [Nabilah Robbaniyah dan Kholifa Ayu Lestari]
+## Tanggal diskusi 1: Kamis, 17-September 2026
+- Peserta: Nabilah Robbaniyah dan Kholifa Ayu Lestari
 - Poin diskusi: Identifikasi pitfball pada studi  kasus FoodGo
 - Perbedaan pendapat (jika ada): ...
 
@@ -11,7 +11,8 @@
 - ...
 
 ## Review Silang
-- [Nama] mengomentari analisis [Nama lain]: ...
+- Nabilah mengomentari analisis Kholifa: mengubah solusi desain awal pitfall "latency is zero" yang awalnya retry menjadi caching/data locality
+- Kholifa mengomentari analisis Nabilah: menambah solusi desain awal pitfall "the network is reliable" dengan retry with exponential backoff dan jitter
 
 ## Log Penggunaan AI (Level 2)
 
