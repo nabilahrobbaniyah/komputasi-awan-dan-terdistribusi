@@ -35,9 +35,9 @@ latensi dapat dipengaruhi oleh berbagai kondisi, seperti peningkatan jumlah requ
 **Dampak ke FoodGo:** ketika modul pembayaran mengalami keterlambatan, modul pesanan akan tetap menunggu karena tidak memiliki batas waktu. jika kondisi tersebut terjadi pada banyak pesanan secara bersamaan, semakin banyak request yang tertahan.
 
 
-**Solusi desain awal:** FoodGo perlu menerapkan timeout pada komunikasi antara modul pesanan dan pembayaran agar modul pesanan tidak menunggu tanpa batas waktu. Jika terjadi kegagalan sementara, sistem dapat menggunakan retry secara terbatas dengan backoff. Untuk proses yang tidak harus mendapatkan respons secara langsung, komunikasi asynchronous juga dapat digunakan agar beban pada server tidak menumpuk.
+**Solusi desain awal:** FoodGo perlu menerapkan timeout pada komunikasi antara modul pesanan dan pembayaran agar modul pesanan tidak menunggu tanpa batas waktu. Untuk proses yang tidak harus mendapatkan respons secara langsung, komunikasi asynchronous juga dapat digunakan agar beban pada server tidak menumpuk.
 
-**Trade-off:** Penerapan timeout dapat mencegah request menunggu terlalu lama, tetapi jika waktu yang ditentukan terlalu singkat, request yang sebenarnya masih dapat berhasil bisa dianggap gagal. Selain itu, penggunaan retry dapat membantu saat terjadi gangguan sementara, tetapi jika terlalu sering justru menambah beban server.
+**Trade-off:** Penerapan timeout dapat mencegah request menunggu terlalu lama, tetapi jika waktu yang ditentukan terlalu singkat, request yang sebenarnya masih dapat berhasil bisa dianggap gagal. tetapi jika terlalu sering justru menambah beban server.
 
 ---
 
