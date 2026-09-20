@@ -37,7 +37,7 @@ latensi dapat dipengaruhi oleh berbagai kondisi, seperti peningkatan jumlah requ
 
 **Solusi desain awal:** FoodGo perlu menerapkan timeout pada komunikasi antara modul pesanan dan pembayaran agar modul pesanan tidak menunggu tanpa batas waktu. Untuk proses yang tidak harus mendapatkan respons secara langsung, komunikasi asynchronous juga dapat digunakan agar beban pada server tidak menumpuk.
 
-**Trade-off:** Penerapan timeout dapat mencegah request menunggu terlalu lama, tetapi jika waktu yang ditentukan terlalu singkat, request yang sebenarnya masih dapat berhasil bisa dianggap gagal. tetapi jika terlalu sering justru menambah beban server.
+**Trade-off:** Penerapan timeout dapat mencegah request menunggu terlalu lama, tetapi jika waktu yang ditentukan terlalu singkat, request yang sebenarnya masih dapat berhasil bisa dianggap gagal.
 
 ---
 
