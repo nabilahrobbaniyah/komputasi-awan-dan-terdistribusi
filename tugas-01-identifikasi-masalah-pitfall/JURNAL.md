@@ -5,10 +5,8 @@
 ## Tanggal diskusi 1: Kamis, 17-September 2026
 - Peserta: Nabilah Robbaniyah dan Kholifa Ayu Lestari
 - Poin diskusi: Identifikasi pitfball pada studi  kasus FoodGo
-- Perbedaan pendapat (jika ada): ...
+- Perbedaan pendapat (jika ada): tidak ada
 
-## [Tanggal diskusi 2]
-- ...
 
 ## Review Silang
 - Nabilah mengomentari analisis Kholifa: mengubah solusi desain awal pitfall "latency is zero" yang awalnya retry menjadi caching/data locality
