@@ -13,6 +13,19 @@ Melanjutkan Tugas 1: FoodGo butuh sistem yang **decoupled** agar tim kurir dan t
 3. Jelaskan alur satu skenario penuh secara end-to-end di diagram (misalnya: pelanggan buat pesanan → bayar → resto terima notifikasi → kurir ditugaskan) — tunjukkan komponen mana berkomunikasi dengan siapa, dan **jenis komunikasinya** (sinkron/asinkron, request-response/event).
 4. Analisis tertulis: kenapa gaya ini mengatasi masalah *coupling* dari Tugas 1, dan apa trade-off-nya (mis. Pub-Sub menambah kompleksitas debugging karena alur tidak linear).
 
+## Diagram
+
+```mermaid
+graph LR
+  Client[Pelanggan] -->|HTTP request pesan| OrderSvc[Service Pesanan]
+  OrderSvc -->|RPC sinkron| PaymentSvc[Service Pembayaran]
+  OrderSvc -->|publish event OrderCreated| Broker[(Message Broker)]
+  Broker -->|subscribe| NotifSvc[Service Notifikasi Kurir]
+  Broker -->|subscribe| RestoSvc[Service Katalog Resto]
+```
+````
+
+
 ## Cara Membuat Diagram (Gratis, Cukup Laptop)
 
 Tidak perlu software berbayar. Dua opsi:
