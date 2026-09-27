@@ -15,21 +15,7 @@ Melanjutkan Tugas 1: FoodGo butuh sistem yang **decoupled** agar tim kurir dan t
 
 ## Diagram
 
-## Diagram Arsitektur FoodGo
 
-```mermaid
-graph LR
-    Customer[Pelanggan] -->|HTTP request pesanan| OrderSvc[Service Pesanan]
-
-    OrderSvc -->|Request/Response| CatalogSvc[Service Katalog Restoran]
-
-    OrderSvc -->|Request/Response| PaymentSvc[Service Pembayaran]
-
-    PaymentSvc -->|publish event PaymentSuccess| Broker[(Message Broker)]
-
-    Broker -->|subscribe| NotifSvc[Service Notifikasi Kurir]
-
-    Broker -->|subscribe| CourierSvc[Service Kurir]
 
 
 ## Cara Membuat Diagram (Gratis, Cukup Laptop)
