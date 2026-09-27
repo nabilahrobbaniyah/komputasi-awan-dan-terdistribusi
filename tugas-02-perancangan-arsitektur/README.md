@@ -13,9 +13,38 @@ Melanjutkan Tugas 1: FoodGo butuh sistem yang **decoupled** agar tim kurir dan t
 3. Jelaskan alur satu skenario penuh secara end-to-end di diagram (misalnya: pelanggan buat pesanan → bayar → resto terima notifikasi → kurir ditugaskan) — tunjukkan komponen mana berkomunikasi dengan siapa, dan **jenis komunikasinya** (sinkron/asinkron, request-response/event).
 4. Analisis tertulis: kenapa gaya ini mengatasi masalah *coupling* dari Tugas 1, dan apa trade-off-nya (mis. Pub-Sub menambah kompleksitas debugging karena alur tidak linear).
 
-## Diagram
+## Jawab
+1. FoodGo menggunakan Service-Oriented Architecture (SOA) sebagai gaya arsitektur utama, yang dikombinasikan dengan Publish-Subscribe untuk komunikasi berbasis event.
+Pada SOA, fungsi utama FoodGo dipisahkan menjadi beberapa service, seperti Order Service, Payment Service, Courier/Notification Service, dan Restaurant Catalog Service. Setiap service dapat dikembangkan, diperbarui, dan di-deploy secara lebih independen.
+Publish-Subscribe digunakan untuk proses yang tidak harus menunggu respons secara langsung, misalnya pengiriman notifikasi ketika pembayaran berhasil atau ketika pesanan baru masuk ke restoran. Alasan memilih: karena dapat mengurangi ketergantungan antar-modul sehingga perubahan atau gangguan pada satu service tidak langsung menyebabkan seluruh sistem ikut berhenti
 
-## Diagram
+2. - Order Service: mengelola pembuatan dan status pesanan pelanggan
+   - Payment Service: memproses pembayaran dan memberikan status pembayaran
+   - Courier/Notification Service: mengelola penugasan kurir dan mengirimkan notifikasi
+   - Restaurant Catalog service: menyediakan informasi restoran, menu, harga, dan ketersediaan makanan.
+   - Message Broker: menyampaikan event dari satu service ke service lain secara asynchronous
+
+3. skenario: pelanggan membuat pesanan hingga kurir ditugaskan
+   - Pelanggan memilih menu dan mengirim pesanan ke order service
+   - order service meminta menu dan harga dari restaurant catalog service
+   - setelah pesanan dibuat, order service meminta payment service untuk memproses pembayaran
+   - payment service memproses pembayaran dan mengirimkan hasilnya kembali ke order service
+   - jika pembayaran berhasil, payment service menerbitkan event PaymentSucces ke Message Broker
+   - Restaurant/Notification Service menerima event tersebut secara asynchronous dan dapat mengirimkan informasi bahwa pesanan perlu diproses.
+   - Courier Service menerima event yang relevan dan mencari/menugaskan kurir.
+   - Setelah kurir ditugaskan, sistem mengirimkan notifikasi kepada pelanggan.
+Jenis Komunikasi:
+Customer: Order Service;	Sinkron/request-response
+Order Service: Catalog Service;	Sinkron/request-response
+Order Service: Payment Service;	Sinkron/request-response
+Payment Service: Message Broker;	Asinkron/event
+Message Broker: Notification Service;	Asinkron/event
+Message Broker: Courier Service;	Asinkron/event
+
+4. Arsitektur SOA + Publish-Subscribe mengurangi coupling karena setiap modul dipisahkan menjadi service yang dapat berjalan dan diperbarui secara independen. Message Broker juga membuat beberapa komunikasi tidak perlu dilakukan secara langsung antar-service.
+Trade-off: Arsitektur ini mengurangi ketergantungan, tetapi membuat sistem lebih kompleks dan proses debugging lebih sulit karena komunikasi antar-service berlangsung melalui beberapa komponen
+
+## Diagram FoodGo
 
 ```mermaid
 graph LR
