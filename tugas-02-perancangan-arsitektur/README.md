@@ -52,8 +52,12 @@ graph LR
     OrderSvc -->|Request/Response| CatalogSvc[Service Katalog Restoran]
     OrderSvc -->|Request/Response| PaymentSvc[Service Pembayaran]
     PaymentSvc -->|publish event PaymentSuccess| Broker[(Message Broker)]
-    Broker -->|subscribe| NotifSvc[Service Notifikasi Kurir]
-    Broker -->|subscribe| CourierSvc[Service Kurir]
+    Broker -->|subscribe, PaymentSucces| NotifSvc[Service Notifikasi Kurir]
+    Broker -->|subscribe, PaymentSucces| CourierSvc[Service Kurir]
+    CourierSvc -->|Penugasan kurir| Courier[Kurir]
+    CourierSvc -->|Publish, CourierAssigned| Broker
+    Broker -->|Subscribe, CourierAssigned| NotifSvc[Service Notifikasi]
+    NotifSvc -->|Notifikasi| Customer
 ```
 
 
