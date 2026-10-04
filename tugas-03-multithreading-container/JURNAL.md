@@ -8,7 +8,9 @@
 - Hasil `processed_count` setelah perbaikan: 100 (dari target 100 pesanan)
 
 ## Kendala Docker
-- Error yang ditemui saat `docker build`/`docker run` dan cara memperbaikinya: ...
+- Error yang ditemui saat `docker build`/`docker run` dan cara memperbaikinya:
+  Kendala: Docker Desktop belum berjalan atau daemon Docker belum aktif di latar belakang saat menjalankan perintah, menghasilkan pesan error cannot connect to the Docker daemon.
+  Cara perbaiki: Memastikan aplikasi Docker Desktop sudah dibuka dan status servicenya aktif (running) sebelum mengeksekusi perintah docker build` dan docker run di terminal.
 
 ## Log Penggunaan AI (Level 2)
 
