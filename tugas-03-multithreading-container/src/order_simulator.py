@@ -17,8 +17,8 @@ NUM_WORKERS = 10        # jumlah thread pekerja
 processed_count = 0
 
 # TODO 1: Buat objek Lock di sini untuk melindungi `processed_count`.
-# lock = threading.Lock()
-
+lock = threading.Lock()
+USE_LOCK = False
 
 def process_order(order_id: int) -> None:
     """Proses satu pesanan. Dipanggil oleh tiap thread pekerja."""
@@ -33,8 +33,15 @@ def process_order(order_id: int) -> None:
     # Langkah 2: bungkus increment dengan `with lock:` dan buktikan hasilnya
     #            selalu tepat NUM_ORDERS. Simpan bukti kedua kondisi ini
     #            di JURNAL.md / folder bukti/.
-    pass
-
+    if USE_LOCK:
+        with lock:
+            current = processed_count
+            time.sleep(0.001)
+            processed_count = current + 1
+    else:
+        current = processed_count
+        time.sleep(0.001)
+        processed_count = current + 1
 
 def worker(order_ids: list) -> None:
     """Satu thread pekerja memproses sekumpulan order_id."""
@@ -50,7 +57,13 @@ def main() -> None:
     # start semua thread, lalu join semua thread sebelum lanjut.
     threads = []
     # ... isi logika pembagian tugas & pembuatan thread di sini ...
-
+    chunks = [order_ids[i::NUM_WORKERS] for i in range(0, NUM_WORKERS)]
+    for chunk in chunks:
+        t = threading.Thread(target=worker, args=(chunk,))
+        threads.append(t)
+    
+    for t in threads:
+        t.start()
     for t in threads:
         t.join()
 
