@@ -19,7 +19,7 @@ docker build -t foodgo-order-sim .
 ![status sukses build docker](bukti/buildDocker2.jpeg)
 docker run --rm foodgo-order-sim
 ![running docker](bukti/runDocker.jpeg)
-note: tidak memakai laptop pribadi karena terkendala memori
+> note: sementara tidak memakai laptop pribadi karena terkendala memori
 
 ## Log Penggunaan AI (Level 2)
 
