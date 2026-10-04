@@ -1,11 +1,11 @@
 # Jurnal Proses — Tugas 3
 
 ## Percobaan tanpa Lock
-- Hasil `processed_count` yang didapat: ...
-- Kenapa bisa meleset (jelaskan mekanisme race condition dengan kata sendiri): ...
+- Hasil `processed_count` yang didapat: 35 (dari target 100 pesanan)
+- Kenapa bisa meleset (jelaskan mekanisme race condition dengan kata sendiri): Melesetnya nilai counter terjadi karena fenomena race condition. Ketika multiple thread berjalan secara bersamaan, beberapa thread membaca nilai processed_count yang sama di memori sebelum thread lain sempat memperbaruinya. Saat proses penambahan (processed_count + 1) selesai, thread-thread tersebut menimpa nilai satu sama lain secara acak. Akibatnya, banyak operasi penambahan pesanan yang hilang atau terabaikan sehingga hasil akhir jauh di bawah 100.
 
 ## Percobaan dengan Lock
-- Hasil `processed_count` setelah perbaikan: ...
+- Hasil `processed_count` setelah perbaikan: 100 (dari target 100 pesanan)
 
 ## Kendala Docker
 - Error yang ditemui saat `docker build`/`docker run` dan cara memperbaikinya: ...
