@@ -15,5 +15,5 @@
 > Wajib diisi sesuai kebijakan Level 2 di [`../RUBRIK-UMUM.md`](../RUBRIK-UMUM.md). Tulis "Tidak memakai AI" pada baris pertama jika memang tidak dipakai. Hanya untuk brainstorming ide/outline — bukan untuk kode/analisis/teks akhir.
 
 | Tanggal | Tool AI | Prompt yang diberikan | Ringkasan saran/ide AI | Bagaimana diolah jadi tulisan/kode sendiri |
-|---|---|---|---|---|
+|4 Oct|GPT|membanatu menyusun outline/struktur kode untuk menjalankan beberapa chunk data secara paralel menggunakan threading| menyarankan membagi data menjadi beberapa chunk, kemudian membuat satu thread untuk setiap chunk. Setiap thread menjalankan fungsi tertentu untuk memproses chunk masing-masing. Thread yang dibuat kemudian disimpan dalam sebuah list agar dapat dikelola dan dijalankan.|saya memahami konsep pembagian data menjadi beberapa chunk dan pemrosesan secara paralel. Berdasarkan ide tersebut, saya menyesuaikan implementasinya dengan program saya sendiri|
 | ... | ... | ... | ... | ... |
