@@ -25,13 +25,13 @@ def proses_pembayaran(user_id: str, jumlah: float) -> dict:
     # TODO 2: validasi saldo cukup, kurangi saldo_user[user_id], dan kembalikan
     # dict berisi minimal {"status": "sukses"/"gagal", "saldo_akhir": ...}
     if user_id not in saldo_user:
-        return{"status": "gagal", "saldo_akhir": 0}
+        return{"status": "gagal", "saldo_akhir": 0, "pesan": "user tidak ditemukan"}
     if jumlah <= 0:
-        return{"status": "gagal", "saldo_akhir": saldo_user[user_id]}
+        return{"status": "gagal", "saldo_akhir": saldo_user[user_id], "pesan": "jumlah pemabayaran harus lebih dari 0"}
     if saldo_user[user_id] < jumlah:
-        return{"status": "gagal", "saldo_akhir": saldo_user[user_id]}
+        return{"status": "gagal", "saldo_akhir": saldo_user[user_id], "pesan": "saldo tidak mencukupi"}
     saldo_user[user_id] -= jumlah
-    return{"status": "sukses", "saldo_akhir": saldo_user[user_id]}
+    return{"status": "sukses", "saldo_akhir": saldo_user[user_id], "pesan": "pembayaran berhasil"}
 
 def main():
     # TODO 3: buat SimpleXMLRPCServer di localhost port 8000,

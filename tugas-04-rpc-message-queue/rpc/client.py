@@ -27,6 +27,7 @@ def main():
     hasil = proxy.proses_pembayaran("user1", 2000)
     print(f"status: {hasil['status']}")
     print(f"saldo akhir: Rp. {hasil['saldo_akhir']:,.0f}")
+    print(f"pesan: {hasil['pesan']}")
 
     saldo_akhir = proxy.cek_saldo("user1")
     print(f"\nverifikasi saldo user1: Rp. {saldo_akhir:,.0f}")
