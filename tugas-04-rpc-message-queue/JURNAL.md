@@ -1,7 +1,8 @@
 # Jurnal Proses — Tugas 4
 
 ## Jalur yang dipilih
-- [RPC / MQ / keduanya], alasan: ...
+- keduanya/hybrid (RPC dan MQ), alasan: kebutuhan berbeda-beda, ada bagian yang cocok dengan dengan sinkron, ada yang lebih cocok pakai asinkron. 
+- Cek_saldo, cocok menggunakan sinkron karena modul pesanan butuh jawaban seketika sebelum pesanan bisa dibuat. jika menggunakan asinkron seperti MQ akan menambah kompleksitas yang tidak perlu, modul peasanan harus menunggu balasan sebelum ke proses berikutnya
 
 ## Kendala teknis
 - Error saat setup (mis. koneksi RabbitMQ ditolak, port bentrok): ...
