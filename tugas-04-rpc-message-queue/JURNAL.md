@@ -3,6 +3,7 @@
 ## Jalur yang dipilih
 - keduanya/hybrid (RPC dan MQ), alasan: kebutuhan berbeda-beda, ada bagian yang cocok dengan dengan sinkron, ada yang lebih cocok pakai asinkron. 
 - Cek_saldo, cocok menggunakan sinkron karena modul pesanan butuh jawaban seketika sebelum pesanan bisa dibuat. jika menggunakan asinkron seperti MQ akan menambah kompleksitas yang tidak perlu, modul peasanan harus menunggu balasan sebelum ke proses berikutnya
+- notifikasi kurir, cocok menggunakan asinkron kareana modul pembayaran tidak boleh tertahan hanya karena modul kurir sedang sibuk, lambat, atau down. jika menggunakan sinkron seperti RPC ketika modul kurir down atau lambat, thread modul pembayaran akan menumpuk dan memicu cascading failure atau timeout chaining ke seluruh sistem
 
 ## Kendala teknis
 - Error saat setup (mis. koneksi RabbitMQ ditolak, port bentrok): Pada awal pengujian, program publisher.py mengalami pika.exceptions.AMQPConnectionError karena RabbitMQ belum berjalan atau belum dapat diakses. Selain itu, terdapat kendala saat menentukan lokasi interpreter Python dan menjalankan file dari folder yang benar.
