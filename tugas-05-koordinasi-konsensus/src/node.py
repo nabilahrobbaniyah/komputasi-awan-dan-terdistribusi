@@ -91,6 +91,8 @@ class Node:
                 self.last_leader_contact = time.monotonic()
             print(f"[node {self.node_id}] leader saat ini adalah node {sender_id}")
             self.ok_received.set()
+        elif msg_type == "PING":
+            sender_port = self.peers.get(sender_id)
         else:
             print(f"[node {self.node_id}] pesan tidak dikenali '{msg_type}' dari node {sender_id}")
             
