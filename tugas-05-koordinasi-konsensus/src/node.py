@@ -26,6 +26,10 @@ class Node:
         self.peers = peers
         self.leader_id = None
         self.lock = threading.Lock()
+        self.ok_received = threading.Event()
+        self.election_lock = threading.Lock()
+        self.election_in_progress = False
+        self.last_leader_contact = time.monotonic()
 
     # ---------- Infrastruktur jaringan (SUDAH LENGKAP, jangan diubah) ----------
 
@@ -155,8 +159,37 @@ class Node:
             # (mis. kirim pesan "PING" atau cukup coba connect). Jika gagal
             # (leader mati) dan node ini belum tahu leader baru, panggil
             # start_election().
-            pass
+            with self.lock:
+                leader_id = self.leader_id
+                election_running = self.election_in_progress
 
+            if election_running:
+                continue
+
+            if leader_id is None:
+                self.start_election()
+                continue
+
+            if leader_id == self.node_id:
+                continue
+
+            leader_port = self.peers.get(leader_id)
+            if leader_port is None:
+                print(f"[Node {self.node_id}] Port leader {leader_id} tidak diketahui, memulai election")
+                self.start_election()
+                continue
+
+            leader_alive = self.send_message(leader_port, "PING")
+
+            if leader_alive:
+                with self.lock:
+                    self.last_leader_contact = time.monotonic()
+            else:
+                print(f"[Node {self.node_id}] Leader node {leader_id} tidak merespons, memulai election")
+                with self.lock:
+                    if self.leader_id == leader_id:
+                        self.leader_id = None
+                self.start_election()
 
 def main():
     parser = argparse.ArgumentParser()
