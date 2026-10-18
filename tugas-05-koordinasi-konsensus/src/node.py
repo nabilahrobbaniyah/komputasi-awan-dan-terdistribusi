@@ -90,7 +90,7 @@ class Node:
                 self.leader_id = sender_id
                 self.last_leader_contact = time.monotonic()
             print(f"[node {self.node_id}] leader saat ini adalah node {sender_id}")
-            self.ok_revceived.set()
+            self.ok_received.set()
         else:
             print(f"[node {self.node_id}] pesan tidak dikenali '{msg_type}' dari node {sender_id}")
             
