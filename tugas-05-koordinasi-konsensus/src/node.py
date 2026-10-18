@@ -119,7 +119,7 @@ class Node:
                     return
             
             got_ok = self.ok_received.wait(ELECTION_TIMEOUT)
-            
+
             if got_ok:
                 print(f"[Node {self.node_id}] Ada node lebih tinggi yang aktif, menunggu COORDINATOR")
                 with self.lock:
@@ -138,7 +138,14 @@ class Node:
         # ke SEMUA peer (bukan cuma yang lebih tinggi).
         with self.lock:
             self.leader_id = self.node_id
+            self.last_leader_contact = time.monotonic()
         print(f"[Node {self.node_id}] TODO: broadcast COORDINATOR, saya jadi leader")
+
+        for peer_id, peer_port in self.peers.items():
+            if self.send_message(peer_port, "COORDINATOR"):
+                print(f"[Node {self.node_id}] Mengirim COORDINATOR ke node {peer_id}")
+            else:
+                print(f"[Node {self.node_id}] Gagal mengirim COORDINATOR ke node {peer_id}")
 
     def monitor_leader(self):
         """Loop periodik: cek apakah leader masih hidup, trigger election jika mati."""
