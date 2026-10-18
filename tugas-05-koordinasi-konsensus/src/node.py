@@ -67,7 +67,29 @@ class Node:
         #   - "OK": tandai bahwa ada node lebih tinggi yang masih hidup, sehingga
         #     kita TIDAK boleh mendeklarasikan diri sebagai leader.
         #   - "COORDINATOR": simpan sender_id sebagai leader_id yang baru.
-        print(f"[Node {self.node_id}] Menerima pesan '{msg_type}' dari node {sender_id} (TODO: proses ini)")
+        if msg_type == "ELECTION":
+            print(f"[Node {self.node_id}] Menerima pesan '{msg_type}' dari node {sender_id} (TODO: proses ini)")
+            if self.node_id > sender_id:
+                sender_port = self.peers.get(sender_id)
+                if sender_port is not None:
+                    if self.send_message(sender_port, "OK"):
+                        print(f"[Node{self.node_id}] mengirim OK ke node {sender_id}")
+                    else:
+                        print(f"[Node{self.node_id}] gagal mengirim OK ke node {sender_id}")
+                threading.Thread(target=self.start_election,daemon=True).start()
+        elif msg_type == "OK":
+            print(f"[Node{self.node_id}] menerima OK dari node {sender_id}")
+            if sender_id > self.node_id:
+                self.ok_received.set()
+        elif msg_type == "COORDINATOR":
+            with self.lock:
+                self.leader_id = sender_id
+                self.last_leader_contact = time.monotonic()
+            print(f"[node {self.node_id}] leader saat ini adalah node {sender_id}")
+            self.ok_revceived.set()
+        else:
+            print(f"[node {self.node_id}] pesan tidak dikenali '{msg_type}' dari node {sender_id}")
+            
 
     def start_election(self):
         """Dipanggil saat node ini mendeteksi leader tidak ada / tidak merespons."""
