@@ -50,7 +50,7 @@ class ChordRing:
             if old_successor is not None and key_hash <= node_id:
                 if new_succesor == node_id:
                     print(f"Node lama ID={old_successor} pindah ke node baru ID={node_id}")
-        print(f"[TODO] Node '{node_name}' (id={node_id}) bergabung, alamat {node_ip}")
+        print(f"Node '{node_name}' (id={node_id}) bergabung, alamat {node_ip}")
 
     def leave(self, node_name: str):
         """Keluarkan sebuah node dari ring. Data yang dipegangnya harus
@@ -58,9 +58,24 @@ class ChordRing:
         node_id = hash_id(node_name)
 
         # TODO 4: hapus node_id dari self.nodes.
+        if node_id not in self.nodes:
+            print(f"Node '{node_name}' tidak ditemukan")
+            return
+        old_data = {
+            key_hash: value
+            for key_hash, value in self.data.items()
+            if self.find_successor(key_hash) == node_id
+        }
+        del self.nodes[node_id]
         # TODO 5: cari successor BARU untuk tiap key yang tadinya dipegang
         # node ini, pindahkan ke successor tersebut.
-        print(f"[TODO] Node '{node_name}' (id={node_id}) keluar dari ring")
+        if self.nodes:
+            for key_hash, (kurir_id, ip_kurir) in old_data.items():
+                new_successor = self.find_successor(key_hash)
+                print(
+                    f"{kurir_id} pindah ke node ID={new_successor}"
+                )
+        print(f"Node '{node_name}' (id={node_id}) keluar dari ring")
 
     def find_successor(self, key_hash: int) -> int:
         """Cari node_id dengan nilai hash TERKECIL yang >= key_hash
@@ -68,22 +83,35 @@ class ChordRing:
         ke node dengan hash terkecil di ring (karena ring melingkar)."""
         # TODO 6: implementasikan logika successor di atas menggunakan
         # self.nodes.keys(). Kembalikan node_id (bukan IP).
-        pass
+        if not self.nodes:
+            raise ValueError("Ring kosong")
+        for node_id in sorted(self.nodes.keys()):
+            if node_id >= key_hash:
+                return node_id
+        return min(self.nodes.keys())
 
     def register_kurir(self, kurir_id: str, ip_kurir: str):
         """Simpan mapping ID Kurir -> IP di node yang bertanggung jawab."""
         key_hash = hash_id(kurir_id)
         # TODO 7: panggil find_successor(key_hash) untuk menentukan node
         # penanggung jawab, lalu simpan (kurir_id, ip_kurir) ke self.data[key_hash].
-        pass
+        owner_id = self.find_successor(key_hash)
+        self.data[key_hash] = (kurir_id, ip_kurir)
+        print(
+            f"{kurir_id} -> {ip_kurir}, "
+            f"disimpan oleh node ID={owner_id}"
+        )
 
     def lookup(self, kurir_id: str) -> str | None:
         """Cari alamat IP terkini untuk sebuah ID Kurir."""
         key_hash = hash_id(kurir_id)
         # TODO 8: gunakan find_successor(key_hash) untuk menemukan node
         # penanggung jawab, lalu kembalikan ip_kurir dari self.data jika ada.
-        pass
-
+        self.find_successor(key_hash)
+        entry = self.data.get(key_hash)
+        if entry is not None and entry[0] == kurir_id:
+            return entry[1]
+        return None
 
 def main():
     ring = ChordRing()
