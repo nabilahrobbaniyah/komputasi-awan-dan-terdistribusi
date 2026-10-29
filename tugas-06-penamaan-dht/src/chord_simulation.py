@@ -30,14 +30,26 @@ class ChordRing:
         node_id = hash_id(node_name)
 
         # TODO 1: tambahkan node_id -> node_ip ke self.nodes.
+        self.nodes[node_id] = node_ip
         # TODO 2: cari successor LAMA dari node_id ini (successor sebelum node
         # baru bergabung, gunakan find_successor() dengan node_id INI dikecualikan
         # dulu dari self.nodes saat mencari).
+        del self.nodes[node_id]
+        if self.nodes:
+            old_successor = self.find_successor
+        else:
+            old_successor = None
+        self.nodes[node_id] = node_ip
         # TODO 3: pindahkan semua key di self.data yang seharusnya menjadi
         # tanggung jawab node baru (key dengan hash <= node_id, tapi masih
         # dipegang oleh successor lama) ke bawah tanggung jawab node baru.
         # (Untuk simulasi sederhana, cukup print log siapa mengambil alih apa -
         # tidak perlu benar-benar memindahkan struktur data kompleks.)
+        for key_hash, (kurir_id, ip_kurir) in self.data.items():
+            new_succesor = self.find_successor(key_hash)
+            if old_successor is not None and key_hash <= node_id:
+                if new_succesor == node_id:
+                    print(f"Node lama ID={old_successor} pindah ke node baru ID={node_id}")
         print(f"[TODO] Node '{node_name}' (id={node_id}) bergabung, alamat {node_ip}")
 
     def leave(self, node_name: str):
