@@ -30,6 +30,32 @@ python3 src/chord_simulation.py
 2. Gambarkan (boleh pakai Mermaid, lihat Tugas 2) ring topology dari simulasi kalian, tandai node mana yang bertanggung jawab atas ID Kurir mana.
 3. Jelaskan apa yang terjadi pada mapping saat sebuah node **keluar** dari ring (siapa yang mengambil alih tanggung jawabnya) — dukung dengan output program.
 
+JAWAB:
+1. DHT/Chord cocok untuk FoodGo karena ID kurir tetap, sedangkan alamat IP kurir dapat berubah ketika kurir berpindah lokasi atau jaringan. Dengan Chord, sistem mencari alamat IP berdasarkan ID kurir melalui proses hashing dan aturan successor. Ketika IP kurir berubah, pemetaan ID kurir ke IP dapat diperbarui tanpa mengubah identitas kurir.
+Berbeda dengan flat naming berupa tabel pusat ID→IP, Chord membagi tanggung jawab penyimpanan ke beberapa node. Tabel pusat dapat menjadi bottleneck dan single point of failure jika server pusat bermasalah. DNS juga dapat memetakan nama ke alamat IP, tetapi perubahan alamat dapat terdampak cache dan waktu propagasi. Chord mendistribusikan pemetaan serta menentukan node penanggung jawab berdasarkan ring. Dengan demikian, Chord lebih sesuai untuk simulasi kebutuhan FoodGo yang menginginkan pemetaan terdistribusi tanpa satu server pusat.
+
+2. ### Ring Topology Chord DHT
+
+Diagram berikut menunjukkan ring setelah node Medan bergabung dan sebelum node Surabaya keluar. Setiap node diberi label ID hash dan kurir yang menjadi tanggung jawabnya.
+
+```mermaid
+flowchart LR
+    A["Node Bandung<br/>ID 40<br/>Kurir-002"]
+    B["Node Jakarta 2<br/>ID 102<br/>Kurir-001"]
+    C["Node Medan<br/>ID 123"]
+    D["Node Surabaya<br/>ID 136<br/>Kurir-003, Kurir-011"]
+    E["Node Jakarta 1<br/>ID 177"]
+
+    A --> B --> C --> D --> E --> A
+```
+
+3. Pada output program, node Surabaya dengan ID 136 keluar dari ring. Sebelum keluar, node tersebut bertanggung jawab atas mapping kurir-003 dan kurir-011. Setelah node 136 dihapus, node successor berikutnya untuk kedua mapping tersebut adalah node Jakarta 1 dengan ID 177.
+
+Output program menunjukkan:
+Node 'node-surabaya-1' (ID=136) keluar dari ring
+Mapping kurir-003 (192.168.1.12) pindah ke node ID=177
+Mapping kurir-011 (192.168.1.20) pindah ke node ID=17
+
 ## Struktur Submission
 
 ```
