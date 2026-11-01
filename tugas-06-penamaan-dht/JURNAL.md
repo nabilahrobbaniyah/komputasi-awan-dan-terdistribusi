@@ -6,7 +6,7 @@
 
 ## Skenario join/leave
 - Hasil sebelum & sesudah node baru bergabung: Sebelum node Medan bergabung, node aktif adalah `[40, 102, 136, 177]`. Setelah node Medan dengan ID 123 bergabung, node aktif menjadi `[40, 102, 123, 136, 177]`. Berdasarkan output, lookup kurir-001 tetap menemukan IP `192.168.1.10` pada node ID 102.
-- Hasil sebelum & sesudah node keluar: Sebelum node Surabaya dengan ID 136 keluar, mapping kurir-003 dan kurir-011 menjadi tanggung jawab node ID 136. Setelah node tersebut keluar, kedua mapping dialihkan ke node ID 177. Lookup kurir-001 dan kurir-002 tetap mengembalikan alamat IP yang sesuai.
+- Hasil sebelum & sesudah node keluar: Sebelum node Jakarta-1 dengan ID 177 keluar, ring terdiri atas node ID 40, 102, 123, 136, dan 177. Setelah node Jakarta-1 keluar, ring terdiri atas node ID 40, 102, 123, dan 136. Berdasarkan output, tidak ada mapping yang sebelumnya menjadi tanggung jawab node ID 177. Oleh karena itu, tidak terjadi perpindahan mapping. Lookup kurir-001 dan kurir-002 tetap berhasil mengembalikan alamat IP masing-masing.
 
 ## Log Penggunaan AI (Level 2)
 
