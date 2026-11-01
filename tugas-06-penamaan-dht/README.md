@@ -36,25 +36,28 @@ Berbeda dengan flat naming berupa tabel pusat ID→IP, Chord membagi tanggung ja
 
 2. ### Ring Topology Chord DHT
 
-Diagram berikut menunjukkan ring setelah node Medan bergabung dan sebelum node Surabaya keluar. Setiap node diberi label ID hash dan kurir yang menjadi tanggung jawabnya.
+Diagram berikut menunjukkan ring setelah node Medan bergabung dan sebelum node jakarata-1 keluar. Setiap node diberi label ID hash dan kurir yang menjadi tanggung jawabnya.
 
 ```mermaid
 flowchart LR
     A["Node Bandung<br/>ID 40<br/>Kurir-002"]
     B["Node Jakarta 2<br/>ID 102<br/>Kurir-001"]
     C["Node Medan<br/>ID 123"]
-    D["Node Surabaya<br/>ID 136<br/>Kurir-003, Kurir-011"]
+    D["Node Surabaya<br/>ID 136<br/>Kurir-003"]
     E["Node Jakarta 1<br/>ID 177"]
 
     A --> B --> C --> D --> E --> A
 ```
 
-3. Pada output program, node Surabaya dengan ID 136 keluar dari ring. Sebelum keluar, node tersebut bertanggung jawab atas mapping kurir-003 dan kurir-011. Setelah node 136 dihapus, node successor berikutnya untuk kedua mapping tersebut adalah node Jakarta 1 dengan ID 177.
+3. Pada output program, node jakarta-1 dengan ID 177 keluar dari ring. Sebelum keluar, ring terdiri atas lima node, yaitu ID 40, 102, 123, 136, dan 177.
+Setelah node Jakarta-1 keluar, ring terdiri atas empat node, yaitu ID 40, 102, 123, dan 136.
+Berdasarkan hasil pemetaan, node Jakarta-1 dengan ID 177 tidak memiliki mapping kurir yang terdaftar. Oleh karena itu, tidak terjadi perpindahan tanggung jawab mapping ke node lain.
+Meskipun terjadi perubahan topologi, fungsi lookup tetap dapat menemukan alamat IP kurir berdasarkan ID masing-masing karena mapping masih tersimpan dalam struktur data simulasi
 
 Output program menunjukkan:
-Node 'node-surabaya-1' (ID=136) keluar dari ring
-Mapping kurir-003 (192.168.1.12) pindah ke node ID=177
-Mapping kurir-011 (192.168.1.20) pindah ke node ID=17
+Node 'node-jakarta-1' (ID=177) keluar dari ring
+kurir-001 -> 192.168.1.10
+kurir-002 -> 192.168.1.11
 
 ## Struktur Submission
 
