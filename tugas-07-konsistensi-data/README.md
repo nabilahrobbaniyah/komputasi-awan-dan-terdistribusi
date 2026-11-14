@@ -43,6 +43,7 @@ Cara kerjanya:
 3. **Skenario tanpa jaminan konsistensi (bug terjadi):**
    Pada skenario ini, server Jakarta berhasil memperbarui saldo pelanggan. Namun, sebelum proses replikasi selesai, pelanggan melakukan pemesanan melalui server Bandung. Server Bandung masih membaca saldo lama sehingga transaksi ditolak
    
+
 sequenceDiagram
     actor P as Pelanggan
     participant J as Server Jakarta
@@ -56,14 +57,15 @@ sequenceDiagram
     Note over R,B: Replikasi masih tertunda
 
     P->>B: Memesan makanan
-    B->>B: Baca saldo pelanggan
+    B->>B: Membaca saldo pelanggan
     Note over B: Saldo masih Rp0
     B-->>P: Transaksi ditolak
-    Note over P,B: BUG: Saldo belum diperbarui
+    Note over P,B: BUG - Saldo belum diperbarui
 
     R->>B: Replikasi saldo Rp50.000
     B->>B: Perbarui data saldo
     Note over J,B: Kedua replika akhirnya konsisten
+
 
 **Skenario dengan Read-Your-Writes (bug teratasi)**
 Pada skenario ini, sistem memeriksa versi data sebelum memberikan saldo kepada pelanggan. Jika server Bandung belum memiliki versi terbaru, sistem mengarahkan pembacaan ke server Jakarta
