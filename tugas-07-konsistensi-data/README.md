@@ -69,8 +69,8 @@ sequenceDiagram
 
 
 **Skenario dengan Read-Your-Writes (bug teratasi)**
-Pada skenario ini, sistem memeriksa versi data sebelum memberikan saldo kepada pelanggan. Jika server Bandung belum memiliki versi terbaru, sistem mengarahkan pembacaan ke server Jakarta
 
+Pada skenario ini, sistem memeriksa versi data sebelum memberikan saldo kepada pelanggan. Jika server Bandung belum memiliki versi terbaru, sistem mengarahkan pembacaan ke server Jakarta.
 
 ```mermaid
 sequenceDiagram
@@ -83,7 +83,6 @@ sequenceDiagram
     J->>J: Perbarui saldo Rp50.000 (versi 1)
     J-->>P: Top-up berhasil (versi 1)
     J->>R: Kirim perubahan saldo
-    Note over R,B: Replikasi masih tertunda
 
     P->>B: Memesan makanan
     B->>B: Periksa versi data lokal
@@ -92,11 +91,10 @@ sequenceDiagram
     B->>J: Minta saldo minimal versi 1
     J-->>B: Kirim saldo Rp50.000 (versi 1)
     B-->>P: Saldo terbaru Rp50.000
-    Note over P,B: Read-Your-Writes terpenuhi
 
     R->>B: Replikasi saldo Rp50.000 (versi 1)
     B->>B: Perbarui saldo dan versi data
-    Note over J,B: Replika Bandung sudah diperbarui
+```
 
 
 
