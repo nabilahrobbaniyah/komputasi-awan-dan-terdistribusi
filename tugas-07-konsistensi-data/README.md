@@ -41,8 +41,9 @@ Cara kerjanya:
 6. Pelanggan mendapatkan saldo terbaru sehingga tidak mengalami penolakan transaksi akibat data yang belum diperbarui.
 
 3. **Skenario tanpa jaminan konsistensi (bug terjadi):**
-   Pada skenario ini, server Jakarta berhasil memperbarui saldo pelanggan. Namun, sebelum proses replikasi selesai, pelanggan melakukan pemesanan melalui server Bandung. Server Bandung masih membaca saldo lama sehingga transaksi ditolak
-   
+   ### 3. Skenario tanpa jaminan konsistensi (bug terjadi)
+
+Pada skenario ini, server Jakarta berhasil memperbarui saldo pelanggan. Namun, sebelum proses replikasi selesai, pelanggan melakukan pemesanan melalui server Bandung. Server Bandung masih membaca saldo lama sehingga transaksi ditolak.
 
 ```mermaid
 sequenceDiagram
@@ -61,11 +62,10 @@ sequenceDiagram
     B->>B: Membaca saldo pelanggan
     Note over B: Saldo masih Rp0
     B-->>P: Transaksi ditolak
-    Note over P,B: BUG - Saldo belum diperbarui
 
     R->>B: Replikasi saldo Rp50.000
     B->>B: Perbarui data saldo
-    Note over J,B: Kedua replika akhirnya konsisten
+```
 
 
 **Skenario dengan Read-Your-Writes (bug teratasi)**
