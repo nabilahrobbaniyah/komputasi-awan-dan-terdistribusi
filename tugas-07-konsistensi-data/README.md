@@ -44,6 +44,7 @@ Cara kerjanya:
    Pada skenario ini, server Jakarta berhasil memperbarui saldo pelanggan. Namun, sebelum proses replikasi selesai, pelanggan melakukan pemesanan melalui server Bandung. Server Bandung masih membaca saldo lama sehingga transaksi ditolak
    
 
+```mermaid
 sequenceDiagram
     actor P as Pelanggan
     participant J as Server Jakarta
@@ -70,6 +71,8 @@ sequenceDiagram
 **Skenario dengan Read-Your-Writes (bug teratasi)**
 Pada skenario ini, sistem memeriksa versi data sebelum memberikan saldo kepada pelanggan. Jika server Bandung belum memiliki versi terbaru, sistem mengarahkan pembacaan ke server Jakarta
 
+```text
+```mermaid
 sequenceDiagram
     actor P as Pelanggan
     participant J as Server Jakarta
@@ -77,12 +80,12 @@ sequenceDiagram
     participant R as Proses Replikasi
 
     P->>J: Top-up saldo Rp50.000
-    J->>J: Perbarui saldo menjadi Rp50.000 (versi 1)
-    J-->>P: Top-up berhasil, versi 1
+    J->>J: Perbarui saldo Rp50.000 (versi 1)
+    J-->>P: Top-up berhasil (versi 1)
     J->>R: Kirim perubahan saldo
     Note over R,B: Replikasi masih tertunda
 
-    P->>B: Memesan makanan dan meminta saldo versi 1
+    P->>B: Memesan makanan
     B->>B: Periksa versi data lokal
     Note over B: Versi Bandung masih 0
 
@@ -93,7 +96,7 @@ sequenceDiagram
 
     R->>B: Replikasi saldo Rp50.000 (versi 1)
     B->>B: Perbarui saldo dan versi data
-    Note over J,B: Replika Bandung telah diperbarui
+    Note over J,B: Replika Bandung sudah diperbarui
 
 
 
