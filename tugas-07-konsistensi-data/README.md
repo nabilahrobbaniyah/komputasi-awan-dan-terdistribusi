@@ -71,7 +71,7 @@ sequenceDiagram
 **Skenario dengan Read-Your-Writes (bug teratasi)**
 Pada skenario ini, sistem memeriksa versi data sebelum memberikan saldo kepada pelanggan. Jika server Bandung belum memiliki versi terbaru, sistem mengarahkan pembacaan ke server Jakarta
 
-```text
+
 ```mermaid
 sequenceDiagram
     actor P as Pelanggan
