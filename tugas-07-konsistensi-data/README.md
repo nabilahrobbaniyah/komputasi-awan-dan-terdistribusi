@@ -40,6 +40,10 @@ Cara kerjanya:
 5. Jika versi Bandung masih lebih lama, sistem mengarahkan pembacaan ke server Jakarta atau menunggu hingga replika Bandung memiliki versi yang sesuai.
 6. Pelanggan mendapatkan saldo terbaru sehingga tidak mengalami penolakan transaksi akibat data yang belum diperbarui.
 
+Read-Your-Writes punya keterbatasan karena jaminan konsistensi hanya memastikan bahwa pelanggan dapat melihat hasil pembaruan dta yang sebelumnya dilakukan oleh dirinya sendiri, mekanisme ini tidak secara otomatis membuat seluruh replika memiliki data terbaru pada waktu yang sama.
+Selain itu, Read-Your-Writes tidak menjamin keamanan transaksi apabila terdapat beberapa permintaan pembayaran yang dilakukan secara bersamaan.
+karena itu, FoodGo tetap membutuhkan mekanisme transaksi atomik dan pengendalian konkurensi agar dua transaksi tidak menggunakan saldo yang sama secara bersamaan hingga menyebabkan saldo negatif.
+
 3. **Skenario tanpa jaminan konsistensi (bug terjadi):**
    ### 3. Skenario tanpa jaminan konsistensi (bug terjadi)
 
