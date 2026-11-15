@@ -26,7 +26,10 @@ Hal ini dapat menimbulkan beberapa dampak bisnis, seperti:
 - Pelanggan kehilangan kepercayaan terhadap layanan FoodGo.
 - Muncul keluhan dan pengalaman pengguna yang buruk.
 - Berpotensi menimbulkan kesalahan dalam pencatatan transaksi.
-Berbeda dengan jumlah like di media sosial yang masih dapat menerima keterlambatan pembaruan, data saldo e-wallet harus dijaga konsistensinya karena berkaitan dengan uang pelanggan. Meskipun Sequential Consistency dapat membantu menjaga keseragaman urutan operasi pada seluruh replika, model ini blum tentu menjamin bahwa urutan operasi tersebut sesuai dengan waktu nyata terjadinya transaksi. Dalam sistem keuangan seperti FoodGo, Linearizability dapat menjadi pilihan yang lebh kuat karena setiap operasi seolah-olah terjadi secara atomik pada satu titik waktu dan tetap mempertahankan urutan waktu nyata antaroperasi. karena itu, sistem e-wallet idealnya menggunakan mekanisme konsistensi yang kuat, disertai transaksi atomik untuk memastikan bahwa pemeriksaan dan pengurangan saldo tidak menimbulkan transaksi ganda atau saldo negatif.
+  
+Berbeda dengan jumlah like di media sosial yang masih dapat menerima keterlambatan pembaruan, data saldo e-wallet harus dijaga konsistensinya karena berkaitan dengan uang pelanggan. Meskipun Sequential Consistency dapat membantu menjaga keseragaman urutan operasi pada seluruh replika, model ini blum tentu menjamin bahwa urutan operasi tersebut sesuai dengan waktu nyata terjadinya transaksi.
+
+Dalam sistem keuangan seperti FoodGo, Linearizability dapat menjadi pilihan yang lebh kuat karena setiap operasi seolah-olah terjadi secara atomik pada satu titik waktu dan tetap mempertahankan urutan waktu nyata antaroperasi. karena itu, sistem e-wallet idealnya menggunakan mekanisme konsistensi yang kuat, disertai transaksi atomik untuk memastikan bahwa pemeriksaan dan pengurangan saldo tidak menimbulkan transaksi ganda atau saldo negatif.
 
 2. Selain Sequential Consistency, FoodGo dapat menerapkan pendekatan Read-Your-Writes sebagai solusi tambahan.
 
@@ -41,7 +44,9 @@ Cara kerjanya:
 6. Pelanggan mendapatkan saldo terbaru sehingga tidak mengalami penolakan transaksi akibat data yang belum diperbarui.
 
 Read-Your-Writes punya keterbatasan karena jaminan konsistensi hanya memastikan bahwa pelanggan dapat melihat hasil pembaruan dta yang sebelumnya dilakukan oleh dirinya sendiri, mekanisme ini tidak secara otomatis membuat seluruh replika memiliki data terbaru pada waktu yang sama.
+
 Selain itu, Read-Your-Writes tidak menjamin keamanan transaksi apabila terdapat beberapa permintaan pembayaran yang dilakukan secara bersamaan.
+
 karena itu, FoodGo tetap membutuhkan mekanisme transaksi atomik dan pengendalian konkurensi agar dua transaksi tidak menggunakan saldo yang sama secara bersamaan hingga menyebabkan saldo negatif.
 
 3. **Skenario tanpa jaminan konsistensi (bug terjadi):**
