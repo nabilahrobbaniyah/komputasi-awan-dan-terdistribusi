@@ -26,8 +26,9 @@ Hal ini dapat menimbulkan beberapa dampak bisnis, seperti:
 - Pelanggan kehilangan kepercayaan terhadap layanan FoodGo.
 - Muncul keluhan dan pengalaman pengguna yang buruk.
 - Berpotensi menimbulkan kesalahan dalam pencatatan transaksi.
-  
-Berbeda dengan jumlah like di media sosial yang masih dapat menerima keterlambatan pembaruan, data saldo e-wallet harus dijaga konsistensinya karena berkaitan dengan uang pelanggan. Meskipun Sequential Consistency dapat membantu menjaga keseragaman urutan operasi pada seluruh replika, model ini blum tentu menjamin bahwa urutan operasi tersebut sesuai dengan waktu nyata terjadinya transaksi.
+- Berbeda dengan jumlah like di media sosial yang masih dapat menerima keterlambatan pembaruan, data saldo e-wallet harus dijaga konsistensinya karena berkaitan dengan uang pelanggan.
+
+Meskipun Sequential Consistency dapat membantu menjaga keseragaman urutan operasi pada seluruh replika, model ini blum tentu menjamin bahwa urutan operasi tersebut sesuai dengan waktu nyata terjadinya transaksi.
 
 Dalam sistem keuangan seperti FoodGo, Linearizability dapat menjadi pilihan yang lebh kuat karena setiap operasi seolah-olah terjadi secara atomik pada satu titik waktu dan tetap mempertahankan urutan waktu nyata antaroperasi. karena itu, sistem e-wallet idealnya menggunakan mekanisme konsistensi yang kuat, disertai transaksi atomik untuk memastikan bahwa pemeriksaan dan pengurangan saldo tidak menimbulkan transaksi ganda atau saldo negatif.
 
