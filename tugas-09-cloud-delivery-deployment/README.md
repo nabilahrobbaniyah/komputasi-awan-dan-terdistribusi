@@ -18,6 +18,29 @@ Pemerintah ingin membangun **Sistem Data Kependudukan** (nama, NIK, alamat, data
 3. Jelaskan **minimal 2 risiko spesifik** dari pilihan kalian dan mitigasinya (mis. jika Hybrid Cloud dipilih: risiko sinkronisasi data antara private & public segment).
 4. Bandingkan singkat dengan **satu alternatif yang kalian tolak** — kenapa alternatif itu kurang tepat (mis. kenapa Public Cloud murni ditolak, atau kenapa Private Cloud murni dianggap kurang skalabel).
 
+**JAWAB**
+1. Hybrid Cloud: Hybrid Cloud merupakan model cloud yang menggabungkan Private Cloud dan Public Cloud. Pada sistem data kependudukan, Private Cloud digunakan untuk menyimpan dan mengelola data sensitif warga, sedangkan Public Cloud dapat digunakan untuk komponen yang tidak menyimpan data pribadi sensitif.
+   Alasan pemilihan:
+- Kerahasiaan data: Data nama, NIK, alamat, dan biometrik disimpan di Private Cloud yang infrastrukturnya dikendalikan oleh pemerintah.
+- Skalabilitas: Public Cloud dapat dimanfaatkan untuk menangani lonjakan akses pada layanan non-sensitif, misalnya portal informasi atau halaman pengecekan status.
+- Fleksibilitas: Pemerintah dapat menentukan komponen mana yang ditempatkan di Private Cloud dan mana yang dapat memanfaatkan Public Cloud.
+- Efisiensi: Sumber daya cloud dapat disesuaikan dengan kebutuhan beban kerja tanpa harus menyediakan seluruh kapasitas secara maksimal sejak awal.
+Hubungan dengan karakteristik NIST:
+Karakteristik NIST	: Penerapan pada Sistem Data Kependudukan
+On-demand self-service:	Admin dapat menambah sumber daya komputasi atau penyimpanan sesuai kebutuhan tanpa proses pengadaan perangkat setiap kali dibutuhkan.
+Broad network access:	Sistem dapat diakses oleh instansi berwenang melalui jaringan yang aman dari berbagai lokasi.
+Resource pooling:	Sumber daya Private Cloud digunakan bersama oleh berbagai instansi dengan pembagian akses dan sumber daya yang terkontrol.
+Rapid elasticity:	Kapasitas dapat ditingkatkan ketika terjadi lonjakan akses, misalnya saat pemilu atau pendaftaran sekolah.
+Measured service:	Penggunaan CPU, memori, penyimpanan, dan bandwidth dapat dipantau untuk membantu pengelolaan kapasitas dan efisiensi.
+
+2. Service Model yang digunakan dapat berbeda pada setiap komponen sistem.
+Komponen	Service Model	Alasan:
+Database data kependudukan:	IaaS	Pemerintah memiliki kontrol terhadap server, sistem operasi, konfigurasi keamanan, penyimpanan, dan database.
+Backend API dan aplikasi layanan:	PaaS	Memudahkan pengembangan, deployment, pemeliharaan aplikasi, serta pengelolaan runtime tanpa harus mengelola seluruh infrastruktur server.
+Portal layanan instansi:	PaaS	Aplikasi dapat dikembangkan dan diskalakan sesuai jumlah pengguna serta kebutuhan layanan.
+Email dan kolaborasi internal:	SaaS	Dapat memanfaatkan aplikasi siap pakai untuk mendukung administrasi internal, selama memenuhi kebijakan keamanan pemerintah.
+
+3. 
 ## Struktur Submission
 
 ```
