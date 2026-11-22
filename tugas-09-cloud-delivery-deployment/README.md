@@ -40,7 +40,18 @@ Backend API dan aplikasi layanan:	PaaS	Memudahkan pengembangan, deployment, peme
 Portal layanan instansi:	PaaS	Aplikasi dapat dikembangkan dan diskalakan sesuai jumlah pengguna serta kebutuhan layanan.
 Email dan kolaborasi internal:	SaaS	Dapat memanfaatkan aplikasi siap pakai untuk mendukung administrasi internal, selama memenuhi kebijakan keamanan pemerintah.
 
-3. 
+3. Risiko: Sinkronisasi data antara Private dan Public Cloud. penjelasannya: Perbedaan data atau keterlambatan sinkronisasi dapat menyebabkan informasi yang ditampilkan tidak sesuai.
+   Mitigasi: Data sensitif tetap berada di Private Cloud. Sinkronisasi hanya dilakukan terhadap data yang diperlukan dan telah disaring, menggunakan API aman serta mekanisme validasi.
+   Risiko: Serangan siber dan kebocoran data. Penjelasannya: Sistem yang terhubung ke banyak instansi dan jaringan berpotensi menjadi target serangan.
+   Mitigasi: Menerapkan enkripsi data, autentikasi multifaktor, kontrol akses berbasis peran, firewall, audit log, serta monitoring keamanan
+   Risiko: Lonjakan akses menyebabkan gangguan layanan. Penjelasannya: Banyak instansi mengakses sistem secara bersamaan, terutama saat pemilu atau pendaftaran sekolah.
+   Mitigasi: Menerapkan autoscaling pada komponen yang memungkinkan, load balancing, monitoring kapasitas, serta menyediakan cadangan sumber daya.
+
+   4. Public Cloud murni kurang tepat untuk sistem data kependudukan karena seluruh infrastruktur dikelola penyedia cloud. Pemerintah memiliki keterbatasan kontrol langsung       terhadap infrastruktur dibandingkan Private Cloud.
+
+      Data kependudukan bersifat sangat rahasia dan mencakup informasi pribadi serta biometrik. Oleh karena itu, menempatkan seluruh database inti pada Public Cloud murni         berpotensi menimbulkan risiko terkait kendali infrastruktur, keamanan, dan kepatuhan terhadap kebijakan pengelolaan data pemerintah.
+
+      Hybrid Cloud lebih sesuai karena data sensitif tetap dikelola di Private Cloud, sementara komponen non-sensitif dapat memanfaatkan skalabilitas Public Cloud.
 ## Struktur Submission
 
 ```
