@@ -16,6 +16,4 @@
 
 | Tanggal | Tool AI | Prompt yang diberikan | Ringkasan saran/ide AI | Bagaimana diolah jadi tulisan/kode sendiri |
 |---|---|---|---|---|
-| 22 November 2026 | ChatGPT | 
-
-Membantu memahami studi kasus Sistem Data Kependudukan dan pilihan deployment model serta service model cloud | Membantu memahami studi kasus Sistem Data Kependudukan dan pilihan deployment model serta service model cloudndingan deployment model, service model, karakteristik NIST, risiko, dan mitigasi yang dapat dipertimbangkan. | Memahami konsep yang diberikan, membandingkan pilihan berdasarkan kebutuhan studi kasus, lalu menyusun kembali hasil diskusi dan alasan pemilihan model sesuai pemahaman kelompok. |
+| 22 November 2026 | ChatGPT | Membantu memahami studi kasus Sistem Data Kependudukan dan pilihan deployment model serta service model cloud | Membantu memahami studi kasus Sistem Data Kependudukan dan pilihan deployment model serta service model cloudndingan deployment model, service model, karakteristik NIST, risiko, dan mitigasi yang dapat dipertimbangkan. | Memahami konsep yang diberikan, membandingkan pilihan berdasarkan kebutuhan studi kasus, lalu menyusun kembali hasil diskusi dan alasan pemilihan model sesuai pemahaman kelompok. |
