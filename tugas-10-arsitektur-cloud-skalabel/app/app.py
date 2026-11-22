@@ -22,7 +22,8 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-Type", "text/plain")
         self.end_headers()
-        self.wfile.write(b"TODO: kembalikan INSTANCE_ID di sini\n")
+        response = f"Ditangani oleh instance: {INSTANCE_ID}\n"
+        self.wfile.write(response.encode("utf-8"))
 
     def log_message(self, format, *args):
         # Log singkat ke stdout supaya kelihatan di `docker compose logs`
