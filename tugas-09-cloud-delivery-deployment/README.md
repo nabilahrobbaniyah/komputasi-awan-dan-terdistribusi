@@ -29,7 +29,7 @@ Hubungan dengan karakteristik NIST:
 Karakteristik NIST	: Penerapan pada Sistem Data Kependudukan
 On-demand self-service:	Admin dapat menambah sumber daya komputasi atau penyimpanan sesuai kebutuhan tanpa proses pengadaan perangkat setiap kali dibutuhkan.
 Broad network access:	Sistem dapat diakses oleh instansi berwenang melalui jaringan yang aman dari berbagai lokasi.
-Resource pooling:	Sumber daya Private Cloud digunakan bersama oleh berbagai instansi dengan pembagian akses dan sumber daya yang terkontrol.
+Resource pooling:	Sumber daya Private Cloud digunakan bersama oleh berbagai instansi melalui mekanisme resource pooling dengan isolasi tenant, pembatasan hak akses berbasis peran (RBAC), serta alokasi sumber daya yang terkontrol sehingga data setiap instansi tetap terlindungi.
 Rapid elasticity:	Kapasitas dapat ditingkatkan ketika terjadi lonjakan akses, misalnya saat pemilu atau pendaftaran sekolah.
 Measured service:	Penggunaan CPU, memori, penyimpanan, dan bandwidth dapat dipantau untuk membantu pengelolaan kapasitas dan efisiensi.
 
