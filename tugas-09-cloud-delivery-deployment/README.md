@@ -35,7 +35,7 @@ Measured service:	Penggunaan CPU, memori, penyimpanan, dan bandwidth dapat dipan
 
 2. Service Model yang digunakan dapat berbeda pada setiap komponen sistem.
 Komponen	Service Model	Alasan:
-Database data kependudukan:	IaaS	Pemerintah memiliki kontrol terhadap server, sistem operasi, konfigurasi keamanan, penyimpanan, dan database.
+Database data kependudukan:	IaaS	konfigurasi infrastruktur virtual, sistem operasi, penyimpanan, dan database, termasuk pengelolaan patch keamanan, backup, enkripsi, serta kontrol akses. Namun, pengelolaan infrastruktur fisik tetap menjadi tanggung jawab penyedia layanan cloud apabila menggunakan penyedia eksternal.
 Backend API dan aplikasi layanan:	PaaS	Memudahkan pengembangan, deployment, pemeliharaan aplikasi, serta pengelolaan runtime tanpa harus mengelola seluruh infrastruktur server.
 Portal layanan instansi:	PaaS	Aplikasi dapat dikembangkan dan diskalakan sesuai jumlah pengguna serta kebutuhan layanan.
 Email dan kolaborasi internal:	SaaS	Dapat memanfaatkan aplikasi siap pakai untuk mendukung administrasi internal, selama memenuhi kebijakan keamanan pemerintah.
