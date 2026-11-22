@@ -28,9 +28,10 @@ def kirim_request():
             body = resp.read().decode()
             # TODO 2: ekstrak instance_id dari `body` sesuai format response
             # yang kalian buat di app.py, lalu:
-            # with lock:
-            #     hasil[instance_id] += 1
-            pass
+            instance_id = body.strip().split(":")[-1].strip()
+            with lock:
+                hasil[instance_id] += 1
+            
     except Exception as e:
         with lock:
             hasil["ERROR"] += 1
@@ -47,6 +48,10 @@ def main():
         t.start()
         # TODO 3: batasi jumlah thread aktif bersamaan sesuai CONCURRENCY
         # (mis. dengan semaphore, atau proses batch per CONCURRENCY thread).
+        if len(threads) == CONCURRENCY:
+            for t in threads:
+                t.join()
+            threads = []
 
     for t in threads:
         t.join()
