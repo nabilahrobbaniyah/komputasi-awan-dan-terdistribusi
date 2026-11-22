@@ -41,7 +41,7 @@ Portal layanan instansi:	PaaS	Aplikasi dapat dikembangkan dan diskalakan sesuai 
 Email dan kolaborasi internal:	SaaS	Dapat memanfaatkan aplikasi siap pakai untuk mendukung administrasi internal, selama memenuhi kebijakan keamanan pemerintah.
 
 3. Risiko: Sinkronisasi data antara Private dan Public Cloud. penjelasannya: Perbedaan data atau keterlambatan sinkronisasi dapat menyebabkan informasi yang ditampilkan tidak sesuai.
-   Mitigasi: Data sensitif tetap berada di Private Cloud. Sinkronisasi hanya dilakukan terhadap data yang diperlukan dan telah disaring, menggunakan API aman serta mekanisme validasi.
+   Mitigasi: Data sensitif tetap berada di Private Cloud. Sinkronisasi hanya dilakukan terhadap data yang diperlukan dan telah disaring, menggunakan API aman serta mekanisme validasi. Selain itu, diterapkan mekanisme tokenisasi atau pseudonimisasi untuk informasi yang perlu diproses di Public Cloud, validasi integritas data, API Gateway, dan rate limiting. Database inti tidak memberikan akses langsung dari Public Cloud.
    Risiko: Serangan siber dan kebocoran data. Penjelasannya: Sistem yang terhubung ke banyak instansi dan jaringan berpotensi menjadi target serangan.
    Mitigasi: Menerapkan enkripsi data, autentikasi multifaktor, kontrol akses berbasis peran, firewall, audit log, serta monitoring keamanan
    Risiko: Lonjakan akses menyebabkan gangguan layanan. Penjelasannya: Banyak instansi mengakses sistem secara bersamaan, terutama saat pemilu atau pendaftaran sekolah.
