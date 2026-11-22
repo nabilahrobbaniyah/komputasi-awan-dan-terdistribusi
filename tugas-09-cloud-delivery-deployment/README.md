@@ -47,7 +47,7 @@ Email dan kolaborasi internal:	SaaS	Dapat memanfaatkan aplikasi siap pakai untuk
    Risiko: Lonjakan akses menyebabkan gangguan layanan. Penjelasannya: Banyak instansi mengakses sistem secara bersamaan, terutama saat pemilu atau pendaftaran sekolah.
    Mitigasi: Menerapkan autoscaling pada komponen yang memungkinkan, load balancing, monitoring kapasitas, serta menyediakan cadangan sumber daya.
 
- 4. Public Cloud murni kurang tepat untuk sistem data kependudukan karena seluruh infrastruktur dikelola penyedia cloud. Pemerintah memiliki keterbatasan kontrol langsung       terhadap infrastruktur dibandingkan Private Cloud.
+ 4. Public Cloud murni kurang tepat karena pemerintah tidak memiliki kendali langsung terhadap infrastruktur fisik yang dikelola penyedia layanan. Meskipun penyedia menerapkan mekanisme keamanan, model shared responsibility tetap menempatkan sebagian tanggung jawab keamanan, konfigurasi, dan pengelolaan data pada pemerintah. Pemerintah memiliki keterbatasan kontrol langsung       terhadap infrastruktur dibandingkan Private Cloud.
 
       Data kependudukan bersifat sangat rahasia dan mencakup informasi pribadi serta biometrik. Oleh karena itu, menempatkan seluruh database inti pada Public Cloud murni         berpotensi menimbulkan risiko terkait kendali infrastruktur, keamanan, dan kepatuhan terhadap kebijakan pengelolaan data pemerintah.
 
