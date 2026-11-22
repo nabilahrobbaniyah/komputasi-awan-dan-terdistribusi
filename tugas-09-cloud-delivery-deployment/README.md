@@ -23,7 +23,7 @@ Pemerintah ingin membangun **Sistem Data Kependudukan** (nama, NIK, alamat, data
    Alasan pemilihan:
 - Kerahasiaan data: Data nama, NIK, alamat, dan biometrik disimpan di Private Cloud yang infrastrukturnya dikendalikan oleh pemerintah.
 - Skalabilitas: Public Cloud dapat dimanfaatkan untuk menangani lonjakan akses pada layanan non-sensitif, misalnya portal informasi atau halaman pengecekan status.
-- Fleksibilitas: Pemerintah dapat menentukan komponen mana yang ditempatkan di Private Cloud dan mana yang dapat memanfaatkan Public Cloud.
+- Fleksibilitas: Pemerintah dapat menentukan komponen mana yang ditempatkan di Private Cloud dan mana yang dapat memanfaatkan Public Cloud. Pemisahan antara Private Cloud dan Public Cloud dilakukan berdasarkan klasifikasi data. Data sensitif seperti NIK, alamat, dan biometrik tetap berada di lingkungan Private Cloud. Public Cloud hanya digunakan untuk komponen non-sensitif, seperti portal informasi dan layanan pengecekan status yang tidak mengekspos data pribadi. Komunikasi antarkeduanya dilakukan melalui API Gateway yang dilengkapi autentikasi dan enkripsi.
 - Efisiensi: Sumber daya cloud dapat disesuaikan dengan kebutuhan beban kerja tanpa harus menyediakan seluruh kapasitas secara maksimal sejak awal.
 Hubungan dengan karakteristik NIST:
 Karakteristik NIST	: Penerapan pada Sistem Data Kependudukan
